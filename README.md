@@ -2,7 +2,7 @@
 
 This document explains on how to setup and deploy an Nginx application to an AWS Elastic Kubernetes Service(EKS) cluster.
 
-## Design Choice:
+## Design:
 
 ![Design and Workflow](img/nginx-eks-automode.png)
 
