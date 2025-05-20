@@ -20,7 +20,7 @@ This document explains on how to setup and deploy an Nginx application to an AWS
 - Uses the latest available EKS version as of today: v1.32 for this setup.
 - This terraform module uses two add-ons:
     -  ALB ingress controller - for loadbalancer creation purpose for application deployment.
-    -  ExternalDNS - For automated creation of Route53 records based on ingress resource host.
+    -  ExternalDNS - For automated creation of Route53 records based on ingress host.
     -  Prometheus and Grafana monitoring stack(Optional: can be enabled from terraform module)
 - Deployment strategy to be automated using Github actions.
 - To avoid complexity, this document does not cover the Github actions deployment and instead focus on deploying first using kubectl CLI.
@@ -31,8 +31,8 @@ This document explains on how to setup and deploy an Nginx application to an AWS
 
 ### 1. Clone the repository
 
-    $ git clone https://github.com/kirananil007/nginx-eks-automode.git
-    $ cd nginx-eks-automode
+    $ git clone https://github.com/kirananil007/nginx-eks-automode-cluster.git
+    $ cd nginx-eks-automode-cluster
 
 ### 2. Setup AWS Credentials using aws profile
 
@@ -54,9 +54,27 @@ Change the s3 bucket name and dynamoDB table as per your current account provisi
     }
     
 
+* Note:
+If you don't like to run each command, there is a makefile to do those tasks.
+
+ Useful makefile commands to be run as follows:
+
+    $ make setup        #  setup aws credentials and profile configured
+    $ make init         # Initialize Terraform
+    $ make plan         # See what Terraform will do
+    $ make apply        # Provision infrastructure
+    $ make deploy       # Deploy nginx app to EKS
+    $ make get-pods     # List all running pods
+    $ make port-forward # Port forward to Grafana UI
+    $ make destroy      # Tear down the infrastructure
+
+* Note: Ensure the make commands are run from the root directory.
+
+$ cd nginx-eks-automode-cluster/
+
 Run these terraform commands after switching to directory:
 
-    $ cd nginx-eks-automode/terraform-eks
+    $ cd nginx-eks-automode-cluster/terraform-eks
 
 Terraform command line:
 
