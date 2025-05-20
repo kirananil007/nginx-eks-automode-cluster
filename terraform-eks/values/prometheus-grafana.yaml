@@ -1,0 +1,16 @@
+grafana:
+  enabled: true
+  adminPassword: "admin"
+  service:
+    type: LoadBalancer
+  ingress:
+    enabled: false
+
+prometheus:
+  service:
+    type: LoadBalancer
+
+alertmanager:
+  enabled: true
+  service:
+    type: LoadBalancer
